@@ -1,0 +1,35 @@
+<div>
+  Start Date: {{range.start}}
+</div>
+
+<div>
+  End Date: {{range.end}}
+</div>
+
+<div>
+  Today: {{today}}
+</div>
+
+<div>
+  Date: {{date}}
+</div>
+
+<div>
+  {{ff-date-input date=date on-change=(action (mut date)) class="input"}}
+</div>
+
+<div>
+  {{ff-date-button title="Today" date=today selectedDate=date on-click=(action (mut date)) class="button"}}
+</div>
+
+<div>
+  {{ff-date-range-button title="Today" range=todayRange selectedRange=range on-click=(action (mut range)) class="button"}}
+</div>
+
+<div class="float-left">
+  {{ff-date-calendar date=date on-change=(action (mut date))}}
+</div>
+
+<div class="float-left">
+  {{ff-date-range-calendar range=range on-change=(action (mut range))}}
+</div>

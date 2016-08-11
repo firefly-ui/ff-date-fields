@@ -10,23 +10,26 @@ $date-calendar-disabled-color: $medium-gray !default;
 
 $date-calendar-selected-color: $white !default;
 $date-calendar-selected-background: $dark-gray !default;
+$date-calendar-selected-border: $dark-gray !default;
 
 $date-calendar-range-color: $white !default;
 $date-calendar-range-background: $dark-gray !default;
+$date-calendar-range-border: $dark-gray !default;
 
 $date-calendar-today-border: $medium-gray;
 
 $date-calendar-day-border-radius: 1em;
-$date-calendar-day-padding: 0.15em 0 !default;
+$date-calendar-day-padding: 0.15em !default;
 $date-calendar-day-height: 1.9em !default;
 $date-calendar-day-width: 2.2em !default;
+$date-calendar-day-min-width: 2.2em !default;
 $date-calendar-day-header-font-size: 1em !default;
 
 $date-calendar-month-margin: 1em !default;
 
 .ff-date-calendar {
 
-  header {
+  .ff-date-calendar-header {
     position: relative;
 
     padding: $date-calendar-header-padding;
@@ -94,19 +97,24 @@ $date-calendar-month-margin: 1em !default;
     }
 
     .ff-date-calendar-day {
+      padding: $date-calendar-day-padding 0;
       text-align: center;
       cursor: pointer;
       line-height: $date-calendar-day-height;
-      padding: $date-calendar-day-padding;
 
       span {
+        border-radius: $date-calendar-day-border-radius;
         display: inline-block;
         width: $date-calendar-day-width;
+        min-width: $date-calendar-day-min-width;
         height: $date-calendar-day-height;
+        border: solid 1px transparent;
       }
 
       &.is-today {
-        border-color: $date-calendar-today-border;
+        span {
+          border-color: $date-calendar-today-border;
+        }
       }
 
       &.is-not-in-month {
@@ -122,10 +130,9 @@ $date-calendar-month-margin: 1em !default;
         position: relative;
 
         span {
-          border-radius: $date-calendar-day-border-radius;
-
           color: $date-calendar-selected-color;
           background-color: $date-calendar-selected-background;
+          border-color: $date-calendar-selected-border;
         }
       }
     }
@@ -135,20 +142,60 @@ $date-calendar-month-margin: 1em !default;
     .ff-date-calendar-month {
       .ff-date-calendar-day {
         &.is-in-range {
+          position: relative;
+
           span {
+            position: relative;
             border-radius: 0;
             color: $date-calendar-range-color;
             background-color: $date-calendar-range-background;
+            border-color: $date-calendar-range-border;
+            width: 100%;
+            z-index: 10;
           }
 
-          &.is-start-date span {
-            border-bottom-left-radius: $date-calendar-day-border-radius;
-            border-top-left-radius: $date-calendar-day-border-radius;
+          &.is-start-date {
+            span {
+              border-bottom-left-radius: $date-calendar-day-border-radius;
+              border-top-left-radius: $date-calendar-day-border-radius;
+              width: $date-calendar-day-width;
+              min-width: $date-calendar-day-min-width;
+            }
+
+            &::before {
+              content: " ";
+              display: block;
+              background-color: $date-calendar-range-background;
+              height: $date-calendar-day-height;
+              position: absolute;
+              width: 50%;
+              left: 50%;
+            }
           }
 
-          &.is-end-date span {
-            border-top-right-radius: $date-calendar-day-border-radius;
-            border-bottom-right-radius: $date-calendar-day-border-radius;
+          &.is-end-date {
+            span {
+              border-top-right-radius: $date-calendar-day-border-radius;
+              border-bottom-right-radius: $date-calendar-day-border-radius;
+              width: $date-calendar-day-width;
+              min-width: $date-calendar-day-min-width;
+            }
+
+            &::before {
+              content: " ";
+              display: block;
+              background-color: $date-calendar-range-background;
+              height: $date-calendar-day-height;
+              position: absolute;
+              width: 50%;
+              right: 50%;
+            }
+          }
+
+          &.is-start-date.is-end-date {
+            &::before {
+              display: none;
+            }
           }
         }
       }

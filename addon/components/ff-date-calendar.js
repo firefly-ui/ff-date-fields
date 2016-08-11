@@ -105,7 +105,9 @@ export default Ember.Component.extend({
      * @param [date] The date to select
      */
     selectDate(date) {
-      if (!date.isSame(this.get('date'), 'day')) {
+      const selectedDate = this.get('date');
+
+      if (!selectedDate || !date.isSame(selectedDate, 'day')) {
         this.sendAction('on-change', date.toDate());
       }
     }

@@ -1,4 +1,4 @@
-<header>
+<div class="ff-date-calendar-header">
   <button class="ff-date-calendar-previous" {{action "previousMonth"}}>
     <span class="ff-date-calendar-previous-icon tf-navigate-left"></span>
   </button>
@@ -7,13 +7,13 @@
   </button>
 
   <div class="ff-date-calendar-current">{{moment-format currentMonth currentMonthFormat}}</div>
-</header>
+</div>
 
 <table class="ff-date-calendar-month">
   <thead>
     <tr>
       {{#each dayNames as |dayOfWeek|}}
-        <th class="ff-date-calendar-header">{{dayOfWeek}}</th>
+        <th class="ff-date-calendar-table-header">{{dayOfWeek}}</th>
       {{/each}}
     </tr>
   </thead>
